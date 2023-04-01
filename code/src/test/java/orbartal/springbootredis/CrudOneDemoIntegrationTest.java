@@ -27,7 +27,7 @@ import orbartal.springbootswagger.model.DemoDto;
 @TestMethodOrder(OrderAnnotation.class)
 @ExtendWith(SpringExtension.class)
 @SpringBootTest(classes = SpringbootSwaggerMain.class, webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
-public class HttpClientRestIntegrationTest {
+public class CrudOneDemoIntegrationTest {
 
 	private static final String KEY_1 = "ka1";
 	private static final String VALUE_1 = "va1";
@@ -37,6 +37,22 @@ public class HttpClientRestIntegrationTest {
 	private int port;
 
 	private final Gson gson = new Gson();
+
+	@Order(0)
+	@Test
+	public void testDeleteAllDemo() throws Exception {
+		String url = buildUrlDemo();
+        HttpRequest request = HttpRequest.newBuilder()
+        	.uri(new URI(url))
+            .headers("Content-Type", "application/json")
+            .DELETE()
+            .build();
+
+		BodyHandler<String> handler = HttpResponse.BodyHandlers.ofString();
+        HttpResponse<String> response = HttpClient.newBuilder().build().send(request, handler);
+
+		Assertions.assertEquals(HttpURLConnection.HTTP_OK, response.statusCode());
+	}
 
 	@Order(1)
 	@Test
