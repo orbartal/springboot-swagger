@@ -14,7 +14,7 @@ public class DemoData {
 	private Map<String, DemoDto> demo = new HashMap<>();
 
 	public List<DemoDto> readAll() {
-		return demo.values().stream().toList();
+		return demo.values().stream().sorted((a,b)->a.getKey().compareTo(b.getKey())).toList();
 	}
 
 	public DemoDto readByKey(String key) {
@@ -56,6 +56,10 @@ public class DemoData {
 			throw new RuntimeException("Missing key: " + key);
 		}
 		demo.remove(key);
+	}
+
+	public void deleteAll() {
+		demo.clear();
 	}
 
 }

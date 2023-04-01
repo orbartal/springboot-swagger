@@ -62,4 +62,13 @@ public class DemoApp {
 		}
 	}
 
+	public ResponseEntity<HttpStatus> deleteAll() {
+		try {
+			business.deleteAll();
+			return new ResponseEntity<>(HttpStatus.OK);
+		} catch (Exception e) {
+			return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+		}
+	}
+
 }

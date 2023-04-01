@@ -88,4 +88,12 @@ public class DemoController {
 		return demoApp.deleteByKey(key);
 	}
 
+	@Operation(summary = "Delete all - reset", tags = { "demo"})
+	@ApiResponses({ @ApiResponse(responseCode = "204", content = { @Content(schema = @Schema()) }),
+			@ApiResponse(responseCode = "500", content = { @Content(schema = @Schema()) }) })
+	@DeleteMapping("/demo")
+	public ResponseEntity<HttpStatus> deleteAllDemos() {
+		return demoApp.deleteAll();
+	}
+
 }

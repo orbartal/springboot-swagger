@@ -35,4 +35,8 @@ public class DemoBusiness {
 		data.deleteByKey(key);
 	}
 
+	public void deleteAll() {
+		data.deleteAll();
+	}
+
 }
